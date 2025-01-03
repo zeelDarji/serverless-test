@@ -1,0 +1,28 @@
+service: test-lambda-service-me
+frameworkVersions: '3'
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3004
+    lambdaPort: 3003
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  versionFunctions: false
+  stage: ${opt:stage, 'dev'}
+  region: ap-south-1
+  environment:
+    STAGE: ${self:provider.stage}
+   
+functions:
+  users:
+    handler: src/functions/users/handler.api
+    events:
+      - http:
+          path: /users
+          method: GET
+          cors: true
