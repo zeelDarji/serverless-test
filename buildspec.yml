@@ -9,5 +9,4 @@ phases:
   build:
     commands:
     - echo == Stage = ${STAGE}
-    - npm install --omit=dev
     - serverless deploy --stage ${STAGE}
