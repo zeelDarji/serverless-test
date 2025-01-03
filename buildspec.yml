@@ -1,8 +1,11 @@
 version: 0.2
+env:
 phases:
   install:
     commands:
     - npm install -g serverless@3.38.0
   build:
     commands:
-    - serverless deploy --stage dev
+    - echo == Stage = ${STAGE}
+    - npm install --omit=dev
+    - serverless deploy --stage ${STAGE}
